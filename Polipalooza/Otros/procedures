@@ -1,0 +1,12 @@
+DELIMITER //
+CREATE PROCEDURE ObtenerArtistasPorEscenario(IN escenarioId INT)
+BEGIN
+    SELECT a.artista_id, p.nombre, p.apellido
+    FROM Artistas a
+    JOIN Personas p ON a.persona_id = p.persona_id
+    JOIN Presentaciones pr ON a.artista_id = pr.artista_id
+    WHERE pr.escenario_id = escenarioId;
+END //
+DELIMITER ;
+
+call ObtenerArtistasPorEscenario(1);
