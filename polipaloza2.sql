@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `Artistas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Artistas` (
-  `artista_id` int NOT NULL,
+  `artista_id` int NOT NULL AUTO_INCREMENT,
   `persona_id` int DEFAULT NULL,
   `genero_musical` varchar(50) DEFAULT NULL,
   `es_destacado` tinyint(1) DEFAULT NULL,
@@ -39,7 +39,6 @@ CREATE TABLE `Artistas` (
 
 LOCK TABLES `Artistas` WRITE;
 /*!40000 ALTER TABLE `Artistas` DISABLE KEYS */;
-INSERT INTO `Artistas` VALUES (0,0,NULL,NULL),(1,1,NULL,NULL),(5,5,'rock',NULL),(6,6,'rock',NULL),(7,7,'rock',NULL);
 /*!40000 ALTER TABLE `Artistas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +50,7 @@ DROP TABLE IF EXISTS `Asistentes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Asistentes` (
-  `asistente_id` int NOT NULL,
+  `asistente_id` int NOT NULL AUTO_INCREMENT,
   `persona_id` int DEFAULT NULL,
   `es_vip` tinyint(1) DEFAULT NULL,
   `requerimiento_especial` varchar(100) DEFAULT NULL,
@@ -104,11 +103,11 @@ DROP TABLE IF EXISTS `Escenarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Escenarios` (
-  `escenario_id` int NOT NULL,
+  `escenario_id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `capacidad_maxima` int DEFAULT NULL,
   PRIMARY KEY (`escenario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +116,7 @@ CREATE TABLE `Escenarios` (
 
 LOCK TABLES `Escenarios` WRITE;
 /*!40000 ALTER TABLE `Escenarios` DISABLE KEYS */;
-INSERT INTO `Escenarios` VALUES (0,'f',0),(1,'d',0);
+INSERT INTO `Escenarios` VALUES (1,NULL,NULL);
 /*!40000 ALTER TABLE `Escenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,11 +128,13 @@ DROP TABLE IF EXISTS `PersonalProduccion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `PersonalProduccion` (
-  `personal_id` int NOT NULL,
+  `personal_id` int NOT NULL AUTO_INCREMENT,
   `persona_id` int DEFAULT NULL,
-  `rol` varchar(50) DEFAULT NULL,
+  `roles_rol` int NOT NULL,
   PRIMARY KEY (`personal_id`),
   KEY `persona_id` (`persona_id`),
+  KEY `fk_PersonalProduccion_roles1_idx` (`roles_rol`),
+  CONSTRAINT `fk_PersonalProduccion_roles1` FOREIGN KEY (`roles_rol`) REFERENCES `roles` (`rol`),
   CONSTRAINT `PersonalProduccion_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,7 +145,6 @@ CREATE TABLE `PersonalProduccion` (
 
 LOCK TABLES `PersonalProduccion` WRITE;
 /*!40000 ALTER TABLE `PersonalProduccion` DISABLE KEYS */;
-INSERT INTO `PersonalProduccion` VALUES (0,2,'iluminacion'),(1,3,'sonido'),(2,4,'tecnico');
 /*!40000 ALTER TABLE `PersonalProduccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS `Personas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Personas` (
-  `persona_id` int NOT NULL,
+  `persona_id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
@@ -171,7 +171,6 @@ CREATE TABLE `Personas` (
 
 LOCK TABLES `Personas` WRITE;
 /*!40000 ALTER TABLE `Personas` DISABLE KEYS */;
-INSERT INTO `Personas` VALUES (0,NULL,NULL,NULL,NULL),(1,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +201,6 @@ CREATE TABLE `Presentaciones` (
 
 LOCK TABLES `Presentaciones` WRITE;
 /*!40000 ALTER TABLE `Presentaciones` DISABLE KEYS */;
-INSERT INTO `Presentaciones` VALUES (0,0,0,NULL,NULL),(1,0,1,NULL,NULL);
 /*!40000 ALTER TABLE `Presentaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +227,6 @@ CREATE TABLE `ProduccionEscenarios` (
 
 LOCK TABLES `ProduccionEscenarios` WRITE;
 /*!40000 ALTER TABLE `ProduccionEscenarios` DISABLE KEYS */;
-INSERT INTO `ProduccionEscenarios` VALUES (0,0),(0,1),(0,2);
 /*!40000 ALTER TABLE `ProduccionEscenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +251,8 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `rol` varchar(45) NOT NULL,
+  `rol` int NOT NULL AUTO_INCREMENT,
+  `nombreRol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`rol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -265,7 +263,6 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES ('iluminacion'),('sonido'),('tecnico');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,4 +401,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-21  9:43:35
+-- Dump completed on 2023-06-23 13:54:21
