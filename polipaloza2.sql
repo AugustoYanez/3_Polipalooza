@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: Polipalooza
+-- Host: 127.0.0.1    Database: polipalooza
 -- ------------------------------------------------------
 -- Server version	8.0.33-0ubuntu0.22.04.2
 
@@ -139,7 +139,7 @@ CREATE TABLE `PersonalProduccion` (
   KEY `fk_PersonalProduccion_roles1_idx` (`roles_rol`),
   CONSTRAINT `fk_PersonalProduccion_roles1` FOREIGN KEY (`roles_rol`) REFERENCES `roles` (`rol`),
   CONSTRAINT `PersonalProduccion_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `PersonalProduccion` (
 
 LOCK TABLES `PersonalProduccion` WRITE;
 /*!40000 ALTER TABLE `PersonalProduccion` DISABLE KEYS */;
-INSERT INTO `PersonalProduccion` VALUES (1,1,1),(2,2,2);
+INSERT INTO `PersonalProduccion` VALUES (1,1,1),(2,2,2),(3,3,3),(4,4,4);
 /*!40000 ALTER TABLE `PersonalProduccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `Personas` (
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `Personas` (
 
 LOCK TABLES `Personas` WRITE;
 /*!40000 ALTER TABLE `Personas` DISABLE KEYS */;
-INSERT INTO `Personas` VALUES (1,'Nombre1','Apellido1','1990-01-01','1234567890'),(2,'Nombre2','Apellido2','1995-02-02','9876543210');
+INSERT INTO `Personas` VALUES (1,'Nombre1','Apellido1','1990-01-01','1234567890'),(2,'Nombre2','Apellido2','1995-02-02','9876543210'),(3,'Nombre3','Apellido3','1990-01-01','1234567890'),(4,'Nombre4','Apellido4','1995-02-02','9876543210');
 /*!40000 ALTER TABLE `Personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +233,7 @@ CREATE TABLE `ProduccionEscenarios` (
 
 LOCK TABLES `ProduccionEscenarios` WRITE;
 /*!40000 ALTER TABLE `ProduccionEscenarios` DISABLE KEYS */;
-INSERT INTO `ProduccionEscenarios` VALUES (1,1),(2,2);
+INSERT INTO `ProduccionEscenarios` VALUES (1,1),(2,2),(0,3),(1,4);
 /*!40000 ALTER TABLE `ProduccionEscenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +275,7 @@ INSERT INTO `roles` VALUES (1,'Rol1'),(2,'Rol2');
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'Polipalooza'
+-- Dumping routines for database 'polipalooza'
 --
 /*!50003 DROP FUNCTION IF EXISTS `generoMayor` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -340,38 +340,43 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
 CREATE DEFINER=`alumno`@`localhost` PROCEDURE `AsignarPersonaEscenario`(IN escenarioID INT)
 BEGIN
-DECLARE cantPersonal INT;
-    DECLARE personaID INT;
+
+DECLARE personaID INT;
     
-    -- Verificar si el escenario cumple con el personal mínimo
-    SELECT COUNT(DISTINCT roles_rol) INTO cantPersonal
-    FROM Escenarios
-    JOIN ProduccionEscenarios ON Escenarios.escenario_id = ProduccionEscenarios.escenario_id
-    JOIN PersonalProduccion ON PersonalProduccion.personal_id = ProduccionEscenarios.personal_id 
-    WHERE Escenarios.escenario_id = escenarioID;
-    
-    IF cantPersonal < 3 THEN
+    IF (select personalMinimo(escenarioID)) = 0 THEN
         -- Obtener una persona disponible del personal de producción
         SELECT personal_id INTO personaID
         FROM PersonalProduccion
-        WHERE personal_id NOT IN (SELECT personal_id FROM ProduccionEscenarios);
+        WHERE personal_id NOT IN (SELECT personal_id FROM ProduccionEscenarios) and 
+        roles_rol not in 
+        (select distinct(roles_rol) 
+		from Escenarios
+		join ProduccionEscenarios 
+        on Escenarios.escenario_id = ProduccionEscenarios.escenario_id
+		join PersonalProduccion 
+        on PersonalProduccion.personal_id = ProduccionEscenarios.personal_id 
+		where Escenarios.escenario_id = escenarioID) limit 1;
         
         -- Asignar la persona al escenario
         INSERT INTO ProduccionEscenarios (escenario_id, personal_id)
         VALUES (escenarioID, personaID);
         
         SELECT CONCAT('Se asignó la persona con ID ', personaID, ' al escenario con ID ', escenarioID) AS 'Mensaje';
-    ELSE
+    end if;
+    IF personaID = null THEN
+        SELECT 'no hay personal suficiente' AS 'Mensaje';
+	ELSE
         SELECT 'El escenario ya cumple con el personal mínimo requerido' AS 'Mensaje';
     END IF;
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -494,4 +499,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-23 14:57:06
+-- Dump completed on 2023-06-23 17:14:19
