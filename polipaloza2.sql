@@ -30,7 +30,7 @@ CREATE TABLE `Artistas` (
   PRIMARY KEY (`artista_id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `Artistas_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `Artistas` (
 
 LOCK TABLES `Artistas` WRITE;
 /*!40000 ALTER TABLE `Artistas` DISABLE KEYS */;
+INSERT INTO `Artistas` VALUES (1,1,'Rock',1),(2,2,'Pop',0);
 /*!40000 ALTER TABLE `Artistas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +58,7 @@ CREATE TABLE `Asistentes` (
   PRIMARY KEY (`asistente_id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `Asistentes_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +67,7 @@ CREATE TABLE `Asistentes` (
 
 LOCK TABLES `Asistentes` WRITE;
 /*!40000 ALTER TABLE `Asistentes` DISABLE KEYS */;
+INSERT INTO `Asistentes` VALUES (1,1,1,'Ninguno'),(2,2,0,'Alergia al maní');
 /*!40000 ALTER TABLE `Asistentes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +94,7 @@ CREATE TABLE `Canciones` (
 
 LOCK TABLES `Canciones` WRITE;
 /*!40000 ALTER TABLE `Canciones` DISABLE KEYS */;
+INSERT INTO `Canciones` VALUES (1,1,'Cancion1'),(2,2,'Cancion2');
 /*!40000 ALTER TABLE `Canciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +110,7 @@ CREATE TABLE `Escenarios` (
   `nombre` varchar(50) DEFAULT NULL,
   `capacidad_maxima` int DEFAULT NULL,
   PRIMARY KEY (`escenario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +119,7 @@ CREATE TABLE `Escenarios` (
 
 LOCK TABLES `Escenarios` WRITE;
 /*!40000 ALTER TABLE `Escenarios` DISABLE KEYS */;
-INSERT INTO `Escenarios` VALUES (1,NULL,NULL);
+INSERT INTO `Escenarios` VALUES (1,'Escenario1',1000),(2,'Escenario2',2000);
 /*!40000 ALTER TABLE `Escenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +139,7 @@ CREATE TABLE `PersonalProduccion` (
   KEY `fk_PersonalProduccion_roles1_idx` (`roles_rol`),
   CONSTRAINT `fk_PersonalProduccion_roles1` FOREIGN KEY (`roles_rol`) REFERENCES `roles` (`rol`),
   CONSTRAINT `PersonalProduccion_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +148,7 @@ CREATE TABLE `PersonalProduccion` (
 
 LOCK TABLES `PersonalProduccion` WRITE;
 /*!40000 ALTER TABLE `PersonalProduccion` DISABLE KEYS */;
+INSERT INTO `PersonalProduccion` VALUES (1,1,1),(2,2,2);
 /*!40000 ALTER TABLE `PersonalProduccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +166,7 @@ CREATE TABLE `Personas` (
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +175,7 @@ CREATE TABLE `Personas` (
 
 LOCK TABLES `Personas` WRITE;
 /*!40000 ALTER TABLE `Personas` DISABLE KEYS */;
+INSERT INTO `Personas` VALUES (1,'Nombre1','Apellido1','1990-01-01','1234567890'),(2,'Nombre2','Apellido2','1995-02-02','9876543210');
 /*!40000 ALTER TABLE `Personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,6 +206,7 @@ CREATE TABLE `Presentaciones` (
 
 LOCK TABLES `Presentaciones` WRITE;
 /*!40000 ALTER TABLE `Presentaciones` DISABLE KEYS */;
+INSERT INTO `Presentaciones` VALUES (1,1,1,'2023-01-01 10:00:00','2023-01-01 12:00:00'),(2,2,2,'2023-01-02 14:00:00','2023-01-02 16:00:00');
 /*!40000 ALTER TABLE `Presentaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,6 +233,7 @@ CREATE TABLE `ProduccionEscenarios` (
 
 LOCK TABLES `ProduccionEscenarios` WRITE;
 /*!40000 ALTER TABLE `ProduccionEscenarios` DISABLE KEYS */;
+INSERT INTO `ProduccionEscenarios` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `ProduccionEscenarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +261,7 @@ CREATE TABLE `roles` (
   `rol` int NOT NULL AUTO_INCREMENT,
   `nombreRol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`rol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,6 +270,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'Rol1'),(2,'Rol2');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,8 +293,9 @@ BEGIN
 
 declare nom varchar(45) default "";
 
-select nombre into nom from (select genero_musical as nombre, count(*) as cantidad from Artistas 
-group by nombre having cantidad = (select max(cantidad) from numeroGeneros)) as artistas;
+select nombre into nom 
+from (select genero_musical as nombre, count(*) as cantidad from Artistas 
+group by nombre having cantidad = (select max(cantidad) from numeroGeneros)) as artistas limit 1;
 
 RETURN nom;
 END ;;
@@ -311,7 +320,7 @@ BEGIN
 declare cantPersonal int default 0;
 declare condicion boolean default false;
 
-select count(distinct(rol)) into cantPersonal from Escenarios
+select count(distinct(roles_rol)) into cantPersonal from Escenarios
 join ProduccionEscenarios on Escenarios.escenario_id = ProduccionEscenarios.escenario_id
 join PersonalProduccion on PersonalProduccion.personal_id = ProduccionEscenarios.personal_id 
 where Escenarios.escenario_id = esc;
@@ -321,6 +330,48 @@ if cantPersonal >= 3 then
 end if;
 
 RETURN condicion;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AsignarPersonaEscenario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`alumno`@`localhost` PROCEDURE `AsignarPersonaEscenario`(IN escenarioID INT)
+BEGIN
+DECLARE cantPersonal INT;
+    DECLARE personaID INT;
+    
+    -- Verificar si el escenario cumple con el personal mínimo
+    SELECT COUNT(DISTINCT roles_rol) INTO cantPersonal
+    FROM Escenarios
+    JOIN ProduccionEscenarios ON Escenarios.escenario_id = ProduccionEscenarios.escenario_id
+    JOIN PersonalProduccion ON PersonalProduccion.personal_id = ProduccionEscenarios.personal_id 
+    WHERE Escenarios.escenario_id = escenarioID;
+    
+    IF cantPersonal < 3 THEN
+        -- Obtener una persona disponible del personal de producción
+        SELECT personal_id INTO personaID
+        FROM PersonalProduccion
+        WHERE personal_id NOT IN (SELECT personal_id FROM ProduccionEscenarios);
+        
+        -- Asignar la persona al escenario
+        INSERT INTO ProduccionEscenarios (escenario_id, personal_id)
+        VALUES (escenarioID, personaID);
+        
+        SELECT CONCAT('Se asignó la persona con ID ', personaID, ' al escenario con ID ', escenarioID) AS 'Mensaje';
+    ELSE
+        SELECT 'El escenario ya cumple con el personal mínimo requerido' AS 'Mensaje';
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -350,6 +401,48 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`alumno`@`localhost` PROCEDURE `new_procedure`()
+BEGIN
+DECLARE cantPersonal INT;
+    DECLARE personaID INT;
+    
+    -- Verificar si el escenario cumple con el personal mínimo
+    SELECT COUNT(DISTINCT roles_rol) INTO cantPersonal
+    FROM Escenarios
+    JOIN ProduccionEscenarios ON Escenarios.escenario_id = ProduccionEscenarios.escenario_id
+    JOIN PersonalProduccion ON PersonalProduccion.personal_id = ProduccionEscenarios.personal_id 
+    WHERE Escenarios.escenario_id = escenarioID;
+    
+    IF cantPersonal < 3 THEN
+        -- Obtener una persona disponible del personal de producción
+        SELECT personal_id INTO personaID
+        FROM PersonalProduccion
+        WHERE personal_id NOT IN (SELECT personal_id FROM ProduccionEscenarios);
+        
+        -- Asignar la persona al escenario
+        INSERT INTO ProduccionEscenarios (escenario_id, personal_id)
+        VALUES (escenarioID, personaID);
+        
+        SELECT CONCAT('Se asignó la persona con ID ', personaID, ' al escenario con ID ', escenarioID) AS 'Mensaje';
+    ELSE
+        SELECT 'El escenario ya cumple con el personal mínimo requerido' AS 'Mensaje';
+    END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `rolPersonas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -362,11 +455,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`alumno`@`localhost` PROCEDURE `rolPersonas`()
 BEGIN
-select roles.rol, PersonalProduccion.personal_id  
+select roles.nombreRol, PersonalProduccion.personal_id  
 from roles
-join PersonalProduccion on roles.rol = PersonalProduccion.rol
+join PersonalProduccion on roles.rol = PersonalProduccion.roles_rol
 join Personas on PersonalProduccion.persona_id = Personas.persona_id
-group by roles.rol, PersonalProduccion.personal_id ;
+group by roles.nombreRol, PersonalProduccion.personal_id ;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -401,4 +494,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-23 13:54:21
+-- Dump completed on 2023-06-23 14:57:06
