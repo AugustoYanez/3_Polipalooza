@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: polipalooza
+-- Host: 127.0.0.1    Database: Polipalooza
 -- ------------------------------------------------------
 -- Server version	8.0.33-0ubuntu0.22.04.2
 
@@ -30,18 +30,8 @@ CREATE TABLE `Artistas` (
   PRIMARY KEY (`artista_id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `Artistas_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Artistas`
---
-
-LOCK TABLES `Artistas` WRITE;
-/*!40000 ALTER TABLE `Artistas` DISABLE KEYS */;
-INSERT INTO `Artistas` VALUES (1,1,'Rock',1),(2,2,'Pop',0);
-/*!40000 ALTER TABLE `Artistas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Asistentes`
@@ -58,18 +48,8 @@ CREATE TABLE `Asistentes` (
   PRIMARY KEY (`asistente_id`),
   KEY `persona_id` (`persona_id`),
   CONSTRAINT `Asistentes_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Asistentes`
---
-
-LOCK TABLES `Asistentes` WRITE;
-/*!40000 ALTER TABLE `Asistentes` DISABLE KEYS */;
-INSERT INTO `Asistentes` VALUES (1,1,1,'Ninguno'),(2,2,0,'Alergia al maní');
-/*!40000 ALTER TABLE `Asistentes` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Canciones`
@@ -79,24 +59,14 @@ DROP TABLE IF EXISTS `Canciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Canciones` (
-  `cancion_id` int NOT NULL,
+  `cancion_id` int NOT NULL AUTO_INCREMENT,
   `artista_id` int DEFAULT NULL,
   `nombre_cancion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`cancion_id`),
   KEY `artista_id` (`artista_id`),
   CONSTRAINT `Canciones_ibfk_1` FOREIGN KEY (`artista_id`) REFERENCES `Artistas` (`artista_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Canciones`
---
-
-LOCK TABLES `Canciones` WRITE;
-/*!40000 ALTER TABLE `Canciones` DISABLE KEYS */;
-INSERT INTO `Canciones` VALUES (1,1,'Cancion1'),(2,2,'Cancion2');
-/*!40000 ALTER TABLE `Canciones` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Escenarios`
@@ -110,18 +80,8 @@ CREATE TABLE `Escenarios` (
   `nombre` varchar(50) DEFAULT NULL,
   `capacidad_maxima` int DEFAULT NULL,
   PRIMARY KEY (`escenario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Escenarios`
---
-
-LOCK TABLES `Escenarios` WRITE;
-/*!40000 ALTER TABLE `Escenarios` DISABLE KEYS */;
-INSERT INTO `Escenarios` VALUES (1,'Escenario1',1000),(2,'Escenario2',2000);
-/*!40000 ALTER TABLE `Escenarios` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `PersonalProduccion`
@@ -139,18 +99,8 @@ CREATE TABLE `PersonalProduccion` (
   KEY `fk_PersonalProduccion_roles1_idx` (`roles_rol`),
   CONSTRAINT `fk_PersonalProduccion_roles1` FOREIGN KEY (`roles_rol`) REFERENCES `roles` (`rol`),
   CONSTRAINT `PersonalProduccion_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Personas` (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `PersonalProduccion`
---
-
-LOCK TABLES `PersonalProduccion` WRITE;
-/*!40000 ALTER TABLE `PersonalProduccion` DISABLE KEYS */;
-INSERT INTO `PersonalProduccion` VALUES (1,1,1),(2,2,2),(3,3,3),(4,4,4);
-/*!40000 ALTER TABLE `PersonalProduccion` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Personas`
@@ -166,18 +116,8 @@ CREATE TABLE `Personas` (
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`persona_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Personas`
---
-
-LOCK TABLES `Personas` WRITE;
-/*!40000 ALTER TABLE `Personas` DISABLE KEYS */;
-INSERT INTO `Personas` VALUES (1,'Nombre1','Apellido1','1990-01-01','1234567890'),(2,'Nombre2','Apellido2','1995-02-02','9876543210'),(3,'Nombre3','Apellido3','1990-01-01','1234567890'),(4,'Nombre4','Apellido4','1995-02-02','9876543210');
-/*!40000 ALTER TABLE `Personas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Presentaciones`
@@ -187,28 +127,17 @@ DROP TABLE IF EXISTS `Presentaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Presentaciones` (
-  `presentacion_id` int NOT NULL,
-  `escenario_id` int DEFAULT NULL,
-  `artista_id` int DEFAULT NULL,
+  `escenario_id` int NOT NULL,
+  `artista_id` int NOT NULL,
   `horario_inicio` datetime DEFAULT NULL,
   `horario_fin` datetime DEFAULT NULL,
-  PRIMARY KEY (`presentacion_id`),
+  PRIMARY KEY (`escenario_id`,`artista_id`),
   KEY `escenario_id` (`escenario_id`),
   KEY `artista_id` (`artista_id`),
   CONSTRAINT `Presentaciones_ibfk_1` FOREIGN KEY (`escenario_id`) REFERENCES `Escenarios` (`escenario_id`),
   CONSTRAINT `Presentaciones_ibfk_2` FOREIGN KEY (`artista_id`) REFERENCES `Artistas` (`artista_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Presentaciones`
---
-
-LOCK TABLES `Presentaciones` WRITE;
-/*!40000 ALTER TABLE `Presentaciones` DISABLE KEYS */;
-INSERT INTO `Presentaciones` VALUES (1,1,1,'2023-01-01 10:00:00','2023-01-01 12:00:00'),(2,2,2,'2023-01-02 14:00:00','2023-01-02 16:00:00');
-/*!40000 ALTER TABLE `Presentaciones` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ProduccionEscenarios`
@@ -226,16 +155,6 @@ CREATE TABLE `ProduccionEscenarios` (
   CONSTRAINT `ProduccionEscenarios_ibfk_2` FOREIGN KEY (`personal_id`) REFERENCES `PersonalProduccion` (`personal_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ProduccionEscenarios`
---
-
-LOCK TABLES `ProduccionEscenarios` WRITE;
-/*!40000 ALTER TABLE `ProduccionEscenarios` DISABLE KEYS */;
-INSERT INTO `ProduccionEscenarios` VALUES (1,1),(2,2),(0,3),(1,4);
-/*!40000 ALTER TABLE `ProduccionEscenarios` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `numeroGeneros`
@@ -261,21 +180,11 @@ CREATE TABLE `roles` (
   `rol` int NOT NULL AUTO_INCREMENT,
   `nombreRol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
---
-
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Rol1'),(2,'Rol2');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping routines for database 'polipalooza'
+-- Dumping routines for database 'Polipalooza'
 --
 /*!50003 DROP FUNCTION IF EXISTS `generoMayor` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -340,11 +249,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`alumno`@`localhost` PROCEDURE `AsignarPersonaEscenario`(IN escenarioID INT)
 BEGIN
@@ -448,6 +357,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `personalHorarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`alumno`@`localhost` PROCEDURE `personalHorarios`(personal int)
+BEGIN
+select horario_inicio, horario_fin, PersonalProduccion.personal_id from PersonalProduccion
+Join ProduccionEscenarios on PersonalProduccion.personal_id = ProduccionEscenarios.personal_id
+join Escenarios on ProduccionEscenarios.escenario_id = Escenarios.escenario_id
+join Presentaciones on Presentaciones.escenario_id = Escenarios.escenario_id
+where PersonalProduccion.personal_id = personal;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `rolPersonas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -499,4 +431,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-23 17:14:19
+-- Dump completed on 2023-06-26 10:31:10
