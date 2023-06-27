@@ -1,7 +1,9 @@
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class AccesoBaseDeDatos {
@@ -239,5 +241,135 @@ public class AccesoBaseDeDatos {
             e.printStackTrace();
         }
 
+    }
+
+    public HashSet<Artistas> obtenerDatosArtista(){
+        ResultSet data;
+        HashSet<Artistas>  artistas=new HashSet<Artistas>();
+        String consulta= "select Personas.persona_id,nombre,apellido,fecha_nacimiento,celular,genero_musical,es_destacado from Personas inner join Artistas ON Personas.persona_id=Artistas.artista_id;";
+        System.out.println(consulta);
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(consulta);
+            data = sentenciaSQL.executeQuery(consulta);
+            while (data.next() == true) {
+                Artistas a= new Artistas(data.getInt("persona_id"),data.getString("nombre"),data.getString("apellido"), LocalDate.parse(data.getString("fecha_nacimiento")),data.getString("celular"),data.getString("genero_musical"),data.getBoolean("es_destacado"));
+                artistas.add(a);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return artistas;
+    }
+
+    public void artistaPorEscenario(){
+        ResultSet data;
+        // Lista de artistas por escenario
+        String sqlListaArtistas = "SELECT pr.escenario_id, p.nombre AS nombre_artista " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "JOIN Personas p ON a.persona_id = p.persona_id " +
+                "ORDER BY pr.escenario_id";
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlListaArtistas);
+            data = sentenciaSQL.executeQuery(sqlListaArtistas);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreArtista = data.getString("nombre_artista");
+                System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void artistaMasJoven(){
+        ResultSet data;
+        String sqlArtistaMasJoven = "SELECT pr.escenario_id, p.nombre AS nombre_artista, p.fecha_nacimiento " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "JOIN Personas p ON a.persona_id = p.persona_id " +
+                "WHERE p.fecha_nacimiento = (SELECT MAX(p2.fecha_nacimiento) " +
+                "                            FROM Presentaciones pr2 " +
+                "                            JOIN Artistas a2 ON pr2.artista_id = a2.artista_id " +
+                "                            JOIN Personas p2 ON a2.persona_id = p2.persona_id " +
+                "                            WHERE pr2.escenario_id = pr.escenario_id " +
+                "                            ORDER BY p2.fecha_nacimiento ASC " +
+                "                            LIMIT 1) " +
+                "ORDER BY pr.escenario_id";
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlArtistaMasJoven);
+            data = sentenciaSQL.executeQuery(sqlArtistaMasJoven);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreArtista = data.getString("nombre_artista");
+                Date fechaNacimiento = data.getDate("fecha_nacimiento");
+                System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista + ", Fecha de nacimiento: " + fechaNacimiento);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void escenarioPersonalInsuficiente(){
+        ResultSet data;
+        String sqlEscenariosPersonalInsuficiente = "SELECT Escenarios.escenario_id, Escenarios.nombre " +
+                "FROM Escenarios " +
+                "LEFT JOIN ProduccionEscenarios ON Escenarios.escenario_id = ProduccionEscenarios.escenario_id " +
+                "LEFT JOIN PersonalProduccion ON ProduccionEscenarios.personal_id = PersonalProduccion.personal_id " +
+                "GROUP BY Escenarios.escenario_id, Escenarios.nombre " +
+                "HAVING COUNT(DISTINCT PersonalProduccion.personal_id) < 3 OR COUNT(DISTINCT PersonalProduccion.personal_id) IS NULL";
+
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlEscenariosPersonalInsuficiente);
+            data = sentenciaSQL.executeQuery(sqlEscenariosPersonalInsuficiente);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreEscenario = data.getString("nombre");
+                System.out.println("Escenario ID: " + escenarioId + ", Nombre: " + nombreEscenario);}
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void artistasRepetidos(){
+        ResultSet data;
+        String sqlArtistasRepetidos = "SELECT p.nombre AS nombre_persona " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "JOIN Personas p ON a.persona_id = p.persona_id " +
+                "GROUP BY a.persona_id " +
+                "HAVING COUNT(DISTINCT pr.escenario_id) > 1";
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlArtistasRepetidos);
+            data = sentenciaSQL.executeQuery(sqlArtistasRepetidos);
+            System.out.println("e. ARTISTAS QUE NO CUMPLEN LA REGLA DE TOCAR EN UN SOLO ESCENARIO: \n");
+            while (data.next()) {
+                String nombrePersona = data.getString("nombre_persona");
+                System.out.println("Nombre: " + nombrePersona);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void personalRepetido(){
+        ResultSet data;
+        String sqlPersonalRepetido = "SELECT pp.personal_id " +
+                "FROM ProduccionEscenarios pe " +
+                "JOIN PersonalProduccion pp ON pe.personal_id = pp.personal_id " +
+                "GROUP BY pe.personal_id " +
+                "HAVING COUNT(DISTINCT pe.escenario_id) > 1";
+        System.out.println("e. PERSONALES DE PRODUCCION QUE NO CUMPLEN LA REGLA DE TRABAJAR EN UN SOLO ESCENARIO: \n");
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlPersonalRepetido);
+            data = sentenciaSQL.executeQuery(sqlPersonalRepetido);
+            System.out.println("e. PERSONALES DE PRODUCCION QUE NO CUMPLEN LA REGLA DE TRABAJAR EN UN SOLO ESCENARIO: \n");
+            while (data.next()) {
+                int personalId = data.getInt("personal_id");
+                System.out.println("ID: " + personalId );
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

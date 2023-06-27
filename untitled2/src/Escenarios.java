@@ -1,20 +1,38 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Escenarios {
 
+    private int id;
     private String escenario;
     private int capacidad;
-    private HashMap< Artistas, ArrayList<Date>> presentaciones;
+    private HashMap< Artistas, ArrayList<LocalDateTime>> presentaciones;
     private HashSet<PersonalProduccion> produccioneEscenarios;
 
-    public Escenarios(String escenario, int capacidad, HashMap<Artistas, ArrayList<Date>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
+    public Escenarios() {
+    }
+
+    public Escenarios(String escenario, int capacidad, HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
         this.escenario = escenario;
         this.capacidad = capacidad;
         this.presentaciones = presentaciones;
         this.produccioneEscenarios = produccioneEscenarios;
+    }
+
+    public Escenarios(int id, String escenario, int capacidad) {
+        this.id = id;
+        this.escenario = escenario;
+        this.capacidad = capacidad;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEscenario() {
@@ -33,11 +51,11 @@ public class Escenarios {
         this.capacidad = capacidad;
     }
 
-    public HashMap<Artistas, ArrayList<Date>> getPresentaciones() {
+    public HashMap<Artistas, ArrayList<LocalDateTime>> getPresentaciones() {
         return presentaciones;
     }
 
-    public void setPresentaciones(HashMap<Artistas, ArrayList<Date>> presentaciones) {
+    public void setPresentaciones(HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones) {
         this.presentaciones = presentaciones;
     }
 

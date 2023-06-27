@@ -383,7 +383,7 @@ DELIMITER ;
 /*!50003 DROP PROCEDURE IF EXISTS `rolPersonas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET @saved_col_connection = @@collation_connectArtistasion */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
