@@ -168,6 +168,14 @@ public class Main {
                 String nombreEscenario = rs.getString("nombre");
                 System.out.println("Escenario: " + nombreEscenario);
             }
+
+            //cambiar artista que toca 15hs a 17hs en otro escenario
+
+            
+
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
