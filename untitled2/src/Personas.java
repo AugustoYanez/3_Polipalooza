@@ -16,6 +16,14 @@ public class Personas {
         this.nombre = nombre;
     }
 
+    public Personas(int persona_id, String nombre, String apellido, LocalDate fecha_nacimiento, String celular) {
+        Persona_id = persona_id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.celular = celular;
+    }
+
     public int getPersona_id() {
         return Persona_id;
     }
