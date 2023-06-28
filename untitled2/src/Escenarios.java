@@ -8,7 +8,7 @@ public class Escenarios {
     private int id;
     private String escenario;
     private int capacidad;
-    private HashMap< Artistas, ArrayList<LocalDateTime>> presentaciones;
+    private HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones;
     private HashSet<PersonalProduccion> produccioneEscenarios;
 
     public Escenarios() {

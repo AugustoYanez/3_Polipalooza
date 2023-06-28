@@ -1,4 +1,6 @@
 
+import sun.util.resources.cldr.es.CalendarData_es_CR;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -369,19 +371,22 @@ public class AccesoBaseDeDatos {
             ex.printStackTrace();
         }
     }
-    public void cargarEscenarios(){
+    public HashSet<Escenarios> cargarEscenarios(){
         ResultSet data;
         String sql = "select * from Escenarios;";
+        HashSet<Escenarios>  escenarios=new HashSet<Escenarios>();
         try{
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             data = sentencia.executeQuery(sql);
             while(data.next()){
                 Escenarios a = new Escenarios(data.getInt("escenario_id"), data.getString("nombre"),data.getInt("capacidad_maxima"),new HashMap<Artistas, ArrayList<LocalDateTime>>(),new HashSet<PersonalProduccion>());
                 System.out.println(a.getEscenario() + " "+a.getCapacidad() + " " +a.getId());
+                escenarios.add(a);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return escenarios;
     }
     public void cargarArtista(){
         ResultSet data;

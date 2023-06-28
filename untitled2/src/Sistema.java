@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Sistema {
-    private HashSet<Escenarios>escenarios;
-    private HashSet<PersonalProduccion>personal;
+    private HashSet<Escenarios> escenarios;
+    private HashSet<PersonalProduccion> personal;
     private AccesoBaseDeDatos bdd;
 
     public Sistema() {
         escenarios = new HashSet<>();
         personal = new HashSet<>();
-        List<String> tablas = Arrays.asList("Artistas", "Asistentes", "Canciones", "Escenarios","PersonalProduccion","Personas","Presentaciones","ProduccionEscenarios","roles");
+        List<String> tablas = Arrays.asList("Artistas", "Asistentes", "Canciones", "Escenarios", "PersonalProduccion", "Personas", "Presentaciones", "ProduccionEscenarios", "roles");
         bdd = new AccesoBaseDeDatos("Polipalooza", tablas);
     }
 
@@ -46,6 +46,21 @@ public class Sistema {
         this.bdd = bdd;
     }
 
+    public void remplazarEscenario(){
+
+        setEscenarios(bdd.cargarEscenarios());
+        for (Escenarios e:escenarios){
+            int id = e.getId();
+
+        }
+    }
+    // Para hacer el punto D:
+    //Obtener de  lolla2023.getbdd().escenarios() todos los escenarios lolla2023.setEscnarios()
+    // una vez qu etengo eso cargado, recorro mi hashset escenarios (lolla2023.getEscenarios())
+    // por cada unoi voy a agarrar el id del escenario y llamo a mi funcion o procedure de bdd
+    // que recibe un id escenario y me devuelve todos los artistas que estan ahi con su respectivo horario
+    // y actualiop entonces el hashmap de ese escenairo con esos datos
+
     public static void main(String[] args) {
         Sistema lolla2023 = new Sistema();
 
@@ -62,6 +77,10 @@ public class Sistema {
         for(Artistas a:artistas){
             System.out.println(a);
         }
+
+
+
+
         lolla2023.getbdd().artistaPorEscenario();
         lolla2023.getbdd().cargarEscenarios();
 
@@ -72,12 +91,9 @@ public class Sistema {
         lolla2023.getbdd().personalRepetido();*/
 
 
-        // Para hacer el punto D:
-        // Obtener de  lolla2023.getbdd().escenarios() todos los escenarios lolla2023.setEscnarios()
-        // una vez qu etengo eso cargado, recorro mi hashset escenarios (lolla2023.getEscenarios())
-        // por cada unoi voy a agarrar el id del escenario y llamo a mi funcion o procedure de bdd
-        // que recibe un id escenario y me devuelve todos los artistas que estan ahi con su respectivo horario
-        // y actualiop entonces el hashmap de ese escenairo con esos datos
+
+
+
 
     }
 }
