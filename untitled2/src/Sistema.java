@@ -13,7 +13,7 @@ public class Sistema {
         escenarios = new HashSet<>();
         personal = new HashSet<>();
         List<String> tablas = Arrays.asList("Artistas", "Asistentes", "Canciones", "Escenarios","PersonalProduccion","Personas","Presentaciones","ProduccionEscenarios","roles");
-        new AccesoBaseDeDatos("Polipalooza", tablas);
+        bdd = new AccesoBaseDeDatos("Polipalooza", tablas);
     }
 
     public HashSet<Escenarios> getEscenarios() {
@@ -62,12 +62,16 @@ public class Sistema {
         for(Artistas a:artistas){
             System.out.println(a);
         }
-
         lolla2023.getbdd().artistaPorEscenario();
+        lolla2023.getbdd().cargarEscenarios();
+
+        /*lolla2023.getbdd().artistaPorEscenario();
         lolla2023.getbdd().artistaMasJoven();
         lolla2023.getbdd().escenarioPersonalInsuficiente();
         lolla2023.getbdd().artistasRepetidos();
-        lolla2023.getbdd().personalRepetido();
+        lolla2023.getbdd().personalRepetido();*/
+
+
         // Para hacer el punto D:
         // Obtener de  lolla2023.getbdd().escenarios() todos los escenarios lolla2023.setEscnarios()
         // una vez qu etengo eso cargado, recorro mi hashset escenarios (lolla2023.getEscenarios())

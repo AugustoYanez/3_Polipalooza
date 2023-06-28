@@ -1,6 +1,7 @@
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -264,17 +265,13 @@ public class AccesoBaseDeDatos {
     public void artistaPorEscenario(){
         ResultSet data;
         // Lista de artistas por escenario
-        String sqlListaArtistas = "SELECT pr.escenario_id, p.nombre AS nombre_artista " +
-                "FROM Presentaciones pr " +
-                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
-                "JOIN Personas p ON a.persona_id = p.persona_id " +
-                "ORDER BY pr.escenario_id";
+        String sqlListaArtistas = "call Polipalooza.escenarioArtistas();";
         try {
             PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlListaArtistas);
             data = sentenciaSQL.executeQuery(sqlListaArtistas);
             while (data.next()) {
                 int escenarioId = data.getInt("escenario_id");
-                String nombreArtista = data.getString("nombre_artista");
+                String nombreArtista = data.getString("nombre");
                 System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista);
             }
         } catch (SQLException ex) {
@@ -370,6 +367,37 @@ public class AccesoBaseDeDatos {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+    public void cargarEscenarios(){
+        ResultSet data;
+        String sql = "select * from Escenarios;";
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            data = sentencia.executeQuery(sql);
+            while(data.next()){
+                Escenarios a = new Escenarios(data.getInt("escenario_id"), data.getString("nombre"),data.getInt("capacidad_maxima"),new HashMap<Artistas, ArrayList<LocalDateTime>>(),new HashSet<PersonalProduccion>());
+                System.out.println(a.getEscenario() + " "+a.getCapacidad() + " " +a.getId());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void cargarArtista(){
+        ResultSet data;
+        String sql = "select  Personas.nombre, genero_musical, es_destacado, Presentaciones.escenario_id\n" +
+                "from Presentaciones\n" +
+                "join Artistas on Presentaciones.artista_id = Artistas.artista_id \n" +
+                "join Personas on Personas.persona_id = Artistas.persona_id\n" +
+                "group by Presentaciones.escenario_id, genero_musical, es_destacado, Personas.nombre;";
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            data = sentencia.executeQuery(sql);
+           while(data.next()){
+               new Artistas(null, null, null, null);
+           }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

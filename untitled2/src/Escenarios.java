@@ -14,17 +14,12 @@ public class Escenarios {
     public Escenarios() {
     }
 
-    public Escenarios(String escenario, int capacidad, HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
+    public Escenarios(int id, String escenario, int capacidad, HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
+        this.id = id;
         this.escenario = escenario;
         this.capacidad = capacidad;
         this.presentaciones = presentaciones;
         this.produccioneEscenarios = produccioneEscenarios;
-    }
-
-    public Escenarios(int id, String escenario, int capacidad) {
-        this.id = id;
-        this.escenario = escenario;
-        this.capacidad = capacidad;
     }
 
     public int getId() {
