@@ -15,7 +15,11 @@ public class Sistema {
         List<String> tablas = Arrays.asList("Artistas", "Asistentes", "Canciones", "Escenarios","PersonalProduccion","Personas","Presentaciones","ProduccionEscenarios","roles");
         bdd = new AccesoBaseDeDatos("Polipalooza", tablas);
     }
-
+    public Sistema(HashSet<Escenarios> escenarios, HashSet<PersonalProduccion> personal, AccesoBaseDeDatos bdd) {
+        this.escenarios = escenarios;
+        this.personal = personal;
+        this.bdd = bdd;
+    }
     public HashSet<Escenarios> getEscenarios() {
         return escenarios;
     }
@@ -39,11 +43,16 @@ public class Sistema {
     public void setbdd(AccesoBaseDeDatos bdd) {
         this.bdd = bdd;
     }
-
-    public Sistema(HashSet<Escenarios> escenarios, HashSet<PersonalProduccion> personal, AccesoBaseDeDatos bdd) {
-        this.escenarios = escenarios;
-        this.personal = personal;
-        this.bdd = bdd;
+    public void escenarioSistema(){
+        this.setEscenarios(bdd.cargarEscenarios());
+    }
+    public void personalSistema(){
+        setPersonal(this.bdd.cargarPersonal());
+    }
+    public void escenarioPersonal(){
+        for(Escenarios e: escenarios){
+            e.setProduccioneEscenarios(bdd.cargarPersonalEscenario(e.getId()));
+        }
     }
 
     public static void main(String[] args) {
@@ -57,13 +66,12 @@ public class Sistema {
             System.out.println(ex);
         }
 
-
-        HashSet<Artistas> artistas = lolla2023.getbdd().obtenerDatosArtista();
-        for(Artistas a:artistas){
-            System.out.println(a);
+        lolla2023.escenarioSistema();
+        lolla2023.personalSistema();
+        lolla2023.escenarioPersonal();
+        for (Escenarios e: lolla2023.escenarios) {
+            e.toString();
         }
-        lolla2023.getbdd().artistaPorEscenario();
-        lolla2023.getbdd().cargarEscenarios();
 
         /*lolla2023.getbdd().artistaPorEscenario();
         lolla2023.getbdd().artistaMasJoven();

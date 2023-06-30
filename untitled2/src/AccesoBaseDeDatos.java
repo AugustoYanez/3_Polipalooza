@@ -369,7 +369,8 @@ public class AccesoBaseDeDatos {
             ex.printStackTrace();
         }
     }
-    public void cargarEscenarios(){
+    public HashSet<Escenarios> cargarEscenarios(){
+        HashSet<Escenarios> escenarios = new HashSet<>();
         ResultSet data;
         String sql = "select * from Escenarios;";
         try{
@@ -377,12 +378,14 @@ public class AccesoBaseDeDatos {
             data = sentencia.executeQuery(sql);
             while(data.next()){
                 int id = data.getInt("escenario_id");
-                Escenarios a = new Escenarios(id, data.getString("nombre"),data.getInt("capacidad_maxima"),cargarPresentacion(id),new HashSet<PersonalProduccion>());
+                Escenarios a = new Escenarios(id, data.getString("nombre"),data.getInt("capacidad_maxima"),cargarPresentacion(id), null);
                 System.out.println(a.getEscenario() + " "+a.getCapacidad() + " " +a.getId());
+                escenarios.add(a);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return escenarios;
     }
     public HashMap<Artistas, ArrayList<Date>> cargarPresentacion(int id){
         ResultSet data;
@@ -402,5 +405,41 @@ public class AccesoBaseDeDatos {
             throw new RuntimeException(e);
         }
         return presentaciones;
+    }
+    public HashSet<PersonalProduccion> cargarPersonal(){
+        HashSet<PersonalProduccion> personalProduccion = new HashSet<>();
+        ResultSet data;
+        String sql = "select PersonalProduccion.personal_id, Personas.nombre, nombreRol from Personas\n" +
+                "join PersonalProduccion on Personas.persona_id = PersonalProduccion.persona_id\n" +
+                "join roles on rol = roles_rol;";
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            data = sentencia.executeQuery(sql);
+            while(data.next()){
+                PersonalProduccion a = new PersonalProduccion(data.getInt("personal_id"), data.getString("nombreRol"));
+                personalProduccion.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return personalProduccion;
+    }
+    public HashSet<PersonalProduccion> cargarPersonalEscenario(int id){
+        HashSet<PersonalProduccion> personalProduccion = new HashSet<>();
+        ResultSet data;
+        String sql = "call Polipalooza.escenarioPersonal(" + id + ");";
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            data = sentencia.executeQuery(sql);
+            while(data.next()){
+                PersonalProduccion a = new PersonalProduccion(data.getInt("personal_id"), data.getString("nombreRol"));
+                personalProduccion.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return personalProduccion;
     }
 }

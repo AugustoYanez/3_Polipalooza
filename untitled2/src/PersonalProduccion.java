@@ -1,19 +1,37 @@
 import java.time.LocalDate;
 
 public class PersonalProduccion extends Personas {
-    private Roles rol;
+    private int idPersonal;
+    private String rol;
 
-    public PersonalProduccion(int persona_id, String nombre, String apellido, LocalDate fecha_nacimiento, String celular, Roles rol) {
-        super(persona_id, nombre, apellido, fecha_nacimiento, celular);
+    public PersonalProduccion(int idPersonal, String rol) {
+        super();
+        this.idPersonal = idPersonal;
         this.rol = rol;
     }
 
-    public Roles getRol() {
+    public int getIdPersonal() {
+        return idPersonal;
+    }
+
+    public void setIdPersonal(int idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Roles rol) {
+    public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonalProduccion{" +
+                "idPersonal=" + idPersonal +
+                ", rol='" + rol + '\'' +
+                '}';
     }
 }
 

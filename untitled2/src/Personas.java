@@ -12,6 +12,9 @@ public class Personas {
 
    private String celular;
 
+    public Personas() {
+    }
+
     public Personas(String nombre) {
         this.nombre = nombre;
     }

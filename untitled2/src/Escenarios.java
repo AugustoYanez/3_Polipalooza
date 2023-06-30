@@ -62,4 +62,15 @@ public class Escenarios {
     public void setProduccioneEscenarios(HashSet<PersonalProduccion> produccioneEscenarios) {
         this.produccioneEscenarios = produccioneEscenarios;
     }
+
+    @Override
+    public String toString() {
+        return "Escenarios{" +
+                "id=" + id +
+                ", escenario='" + escenario + '\'' +
+                ", capacidad=" + capacidad +
+                ", presentaciones=" + presentaciones +
+                ", produccioneEscenarios=" + produccioneEscenarios +
+                '}';
+    }
 }
