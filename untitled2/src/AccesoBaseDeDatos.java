@@ -376,28 +376,31 @@ public class AccesoBaseDeDatos {
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             data = sentencia.executeQuery(sql);
             while(data.next()){
-                Escenarios a = new Escenarios(data.getInt("escenario_id"), data.getString("nombre"),data.getInt("capacidad_maxima"),new HashMap<Artistas, ArrayList<LocalDateTime>>(),new HashSet<PersonalProduccion>());
+                int id = data.getInt("escenario_id");
+                Escenarios a = new Escenarios(id, data.getString("nombre"),data.getInt("capacidad_maxima"),cargarPresentacion(id),new HashSet<PersonalProduccion>());
                 System.out.println(a.getEscenario() + " "+a.getCapacidad() + " " +a.getId());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void cargarArtista(){
+    public HashMap<Artistas, ArrayList<Date>> cargarPresentacion(int id){
         ResultSet data;
-        String sql = "select  Personas.nombre, genero_musical, es_destacado, Presentaciones.escenario_id\n" +
-                "from Presentaciones\n" +
-                "join Artistas on Presentaciones.artista_id = Artistas.artista_id \n" +
-                "join Personas on Personas.persona_id = Artistas.persona_id\n" +
-                "group by Presentaciones.escenario_id, genero_musical, es_destacado, Personas.nombre;";
+        String sql = "call Polipalooza.cargarPresentaciones(" + id + ");";
+        HashMap <Artistas, ArrayList<Date>> presentaciones = new HashMap<Artistas, ArrayList<Date>>();
         try{
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             data = sentencia.executeQuery(sql);
            while(data.next()){
-               new Artistas(null, null, null, null);
+               Artistas a = new Artistas(data.getString("nombre"), data.getString("genero_musical"), data.getBoolean("es_destacado"), null);
+               ArrayList<Date> horario = new ArrayList<>();
+               horario.add(data.getDate("horario_inicio"));
+               horario.add(data.getDate("horario_fin"));
+               presentaciones.put(a, horario);
            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return presentaciones;
     }
 }

@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +9,13 @@ public class Escenarios {
     private int id;
     private String escenario;
     private int capacidad;
-    private HashMap< Artistas, ArrayList<LocalDateTime>> presentaciones;
+    private HashMap< Artistas, ArrayList<Date>> presentaciones;
     private HashSet<PersonalProduccion> produccioneEscenarios;
 
     public Escenarios() {
     }
 
-    public Escenarios(int id, String escenario, int capacidad, HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
+    public Escenarios(int id, String escenario, int capacidad, HashMap<Artistas, ArrayList<Date>> presentaciones, HashSet<PersonalProduccion> produccioneEscenarios) {
         this.id = id;
         this.escenario = escenario;
         this.capacidad = capacidad;
@@ -46,11 +47,11 @@ public class Escenarios {
         this.capacidad = capacidad;
     }
 
-    public HashMap<Artistas, ArrayList<LocalDateTime>> getPresentaciones() {
+    public HashMap<Artistas, ArrayList<Date>> getPresentaciones() {
         return presentaciones;
     }
 
-    public void setPresentaciones(HashMap<Artistas, ArrayList<LocalDateTime>> presentaciones) {
+    public void setPresentaciones(HashMap<Artistas, ArrayList<Date>> presentaciones) {
         this.presentaciones = presentaciones;
     }
 
