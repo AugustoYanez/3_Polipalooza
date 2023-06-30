@@ -1,8 +1,6 @@
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Sistema {
     private HashSet<Escenarios>escenarios;
@@ -54,6 +52,15 @@ public class Sistema {
             e.setProduccioneEscenarios(bdd.cargarPersonalEscenario(e.getId()));
         }
     }
+    public void cambiarHorarioArtista(int escenario, Date editar, Date inicio){
+        for (Escenarios e:escenarios) {
+            if (e.getId() == escenario){
+                for (ArrayList<Date> listaDeFechas : e.getPresentaciones().values()) {
+                    Date primerFecha = listaDeFechas.get(0);
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Sistema lolla2023 = new Sistema();
@@ -69,15 +76,8 @@ public class Sistema {
         lolla2023.escenarioSistema();
         lolla2023.personalSistema();
         lolla2023.escenarioPersonal();
-        for (Escenarios e: lolla2023.escenarios) {
-            e.toString();
-        }
 
-        /*lolla2023.getbdd().artistaPorEscenario();
-        lolla2023.getbdd().artistaMasJoven();
-        lolla2023.getbdd().escenarioPersonalInsuficiente();
-        lolla2023.getbdd().artistasRepetidos();
-        lolla2023.getbdd().personalRepetido();*/
+        lolla2023.getbdd().artistaPorEscenario();
 
 
         // Para hacer el punto D:
