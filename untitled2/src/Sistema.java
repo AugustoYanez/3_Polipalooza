@@ -52,11 +52,20 @@ public class Sistema {
             e.setProduccioneEscenarios(bdd.cargarPersonalEscenario(e.getId()));
         }
     }
-    public void cambiarHorarioArtista(int escenario, Date editar, Date inicio){
+    public void cambiarHorarioArtista(int escenario, Date editar,Date editar1, Date inicio){
+        HashMap< Artistas, ArrayList<Date> > remplazo1 = new HashMap<>();
         for (Escenarios e:escenarios) {
             if (e.getId() == escenario){
-                for (ArrayList<Date> listaDeFechas : e.getPresentaciones().values()) {
-                    Date primerFecha = listaDeFechas.get(0);
+                for (Map.Entry<Artistas, ArrayList<Date>> presentacion: e.getPresentaciones().entrySet()) {
+                    ArrayList<Date> remplazo = new ArrayList<>();
+                    if (presentacion.getValue().get(0).equals(inicio)){
+                        remplazo.add(editar);
+                        remplazo.add(editar1);
+                        remplazo1.put(presentacion.getKey(), remplazo);
+                    }else {
+                        remplazo1.put(presentacion.getKey(),presentacion.getValue());
+                    }
+                    e.setPresentaciones(remplazo1);
                 }
             }
         }

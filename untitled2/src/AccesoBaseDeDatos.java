@@ -1,4 +1,5 @@
 
+import javax.xml.ws.Response;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +33,27 @@ public class AccesoBaseDeDatos {
         }
     }
 
+    public void artistaDestacadoEscenario(){
+        String sql = "SELECT pr.escenario_id, p.nombre AS nombre_artista " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "JOIN Personas p ON a.persona_id = p.persona_id " +
+                "WHERE a.es_destacado = 1 " +
+                "ORDER BY pr.escenario_id";
+        ResultSet data;
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            data = sentencia.executeQuery(sql);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreArtista = data.getString("nombre_artista");
+                System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista);
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
+    }
     public HashSet<Artistas> obtenerDatosArtista(){
         ResultSet data;
         HashSet<Artistas>  artistas=new HashSet<Artistas>();
@@ -117,7 +138,54 @@ public class AccesoBaseDeDatos {
             ex.printStackTrace();
         }
     }
+    public void ar(){
+        String sql = "SELECT pr.escenario_id, a.genero_musical " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "GROUP BY pr.escenario_id, a.genero_musical " +
+                "ORDER BY pr.escenario_id";
+        ResultSet data;
 
+        try{
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sql);
+            data = sentenciaSQL.executeQuery(sql);
+            int escenarioActual = 0;
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String generoMusical = data.getString("genero_musical");
+
+                if (escenarioId != escenarioActual) {
+                    System.out.println("Escenario ID: " + escenarioId);
+                    escenarioActual = escenarioId;
+                }
+
+                System.out.println("Género musical: " + generoMusical);
+            }
+            System.out.println();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+    public void ar1(){
+        String sql = "SELECT e.nombre" +"\n" +
+                "FROM Escenarios e" +"\n" +
+                "JOIN Presentaciones p ON e.escenario_id = p.escenario_id " +"\n" +
+                " WHERE p.horario_fin = (SELECT MAX(horario_fin) FROM Presentaciones);";
+        ResultSet data;
+
+        try{
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sql);
+            data = sentenciaSQL.executeQuery(sql);
+            while (data.next()) {
+                if (data.next()) {
+                    String nombreEscenario = data.getString("nombre");
+                    System.out.println("Escenario: " + nombreEscenario);
+                }}
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     public void artistasRepetidos(){
         ResultSet data;
         String sqlArtistasRepetidos = "SELECT p.nombre AS nombre_persona " +
@@ -129,7 +197,6 @@ public class AccesoBaseDeDatos {
         try {
             PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlArtistasRepetidos);
             data = sentenciaSQL.executeQuery(sqlArtistasRepetidos);
-            System.out.println("e. ARTISTAS QUE NO CUMPLEN LA REGLA DE TOCAR EN UN SOLO ESCENARIO: \n");
             while (data.next()) {
                 String nombrePersona = data.getString("nombre_persona");
                 System.out.println("Nombre: " + nombrePersona);
@@ -145,11 +212,9 @@ public class AccesoBaseDeDatos {
                 "JOIN PersonalProduccion pp ON pe.personal_id = pp.personal_id " +
                 "GROUP BY pe.personal_id " +
                 "HAVING COUNT(DISTINCT pe.escenario_id) > 1";
-        System.out.println("e. PERSONALES DE PRODUCCION QUE NO CUMPLEN LA REGLA DE TRABAJAR EN UN SOLO ESCENARIO: \n");
         try {
             PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlPersonalRepetido);
             data = sentenciaSQL.executeQuery(sqlPersonalRepetido);
-            System.out.println("e. PERSONALES DE PRODUCCION QUE NO CUMPLEN LA REGLA DE TRABAJAR EN UN SOLO ESCENARIO: \n");
             while (data.next()) {
                 int personalId = data.getInt("personal_id");
                 System.out.println("ID: " + personalId );
