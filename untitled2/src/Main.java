@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Main {
@@ -13,6 +14,16 @@ public class Main {
             System.out.println(ex);
         }
 
+
+
+      HashSet<Escenarios> escenarios = lola.crearEscenario();
+
+        for ( Escenarios i : escenarios){
+            System.out.println(i.getId() + "\n"+
+                    i.getEscenario() + "\n" +
+                    i.getCapacidad());
+        }
+/**
         lola.escenarioSistema();
         lola.personalSistema();
         lola.escenarioPersonal();
@@ -41,7 +52,7 @@ public class Main {
         System.out.println("------------------------------------------------------------");
         System.out.println("El nombre del escenario que tiene el último show del festival:");
         lola.getbdd().ar1();//no funciona
-
+**/
 
     }
 }
