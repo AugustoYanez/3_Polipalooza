@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Sistema lola = new Sistema();
         try {
-            lola.getbdd().conectar("root","");
+            lola.getbdd().conectar("alumno","alumnoipm");
 
         } catch (SQLException ex) {
             System.out.println(ex);
