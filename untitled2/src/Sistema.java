@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Sistema {
     private HashSet<Escenarios>escenarios;
+    private HashSet<Artistas>artistas;
     private HashSet<PersonalProduccion>personal;
     private AccesoBaseDeDatos bdd;
 
@@ -19,6 +20,13 @@ public class Sistema {
         this.personal = personal;
         this.bdd = bdd;
     }
+
+    public HashSet<Artistas>recorrerArtistas(){
+        HashSet<Artistas> artistas = new HashSet<>();
+
+        return artistas;
+    }
+
     public HashSet<Escenarios> getEscenarios() {
         return escenarios;
     }

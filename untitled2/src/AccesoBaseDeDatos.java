@@ -31,6 +31,22 @@ public class AccesoBaseDeDatos {
         }
     }
 
+    public ArrayList<String> obtenerColumnasDeUnaTabla(String nombreTabla) {
+        String consulta = "SHOW COLUMNS FROM " + nombreTabla;
+        ArrayList<String> nombreCampos = new ArrayList<>();
+        try {
+            ResultSet data;
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(consulta);
+            data = sentenciaSQL.executeQuery(consulta);
+            while (data.next() == true) {
+                nombreCampos.add(data.getString("Field"));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nombreCampos;
+    }
     public void artistaDestacadoEscenario(){
         String sql = "SELECT pr.escenario_id, p.nombre AS nombre_artista " +
                 "FROM Presentaciones pr " +
@@ -52,22 +68,31 @@ public class AccesoBaseDeDatos {
         }
 
     }
-    public HashSet<Artistas> obtenerDatosArtista(){
+    public HashMap<Integer,HashMap<String,Object>> obtenerDatosArtista(){
         ResultSet data;
-        HashSet<Artistas>  artistas=new HashSet<Artistas>();
+        ArrayList<String> nombres = obtenerColumnasDeUnaTabla("Usuario");
+        HashMap<Integer,HashMap<String,Object>>  valores=new HashMap<Integer,HashMap<String,Object>>();
         String consulta= "select Personas.persona_id,nombre,apellido,fecha_nacimiento,celular,genero_musical,es_destacado from Personas inner join Artistas ON Personas.persona_id=Artistas.artista_id;";
         System.out.println(consulta);
         try {
             PreparedStatement sentenciaSQL = conexion.prepareStatement(consulta);
             data = sentenciaSQL.executeQuery(consulta);
             while (data.next() == true) {
-                Artistas a= new Artistas(data.getInt("persona_id"),data.getString("nombre"),data.getString("apellido"), LocalDate.parse(data.getString("fecha_nacimiento")),data.getString("celular"),data.getString("genero_musical"),data.getBoolean("es_destacado"));
-                artistas.add(a);
+                HashMap<String,Object>aux = new HashMap<String,Object>();
+                aux.put(nombres.get(1),data.getString(nombres.get(1)));
+                aux.put(nombres.get(2),data.getString(nombres.get(2)));
+                aux.put(nombres.get(3),data.getDate(nombres.get(3)));
+                aux.put(nombres.get(4),data.getInt(nombres.get(4)));
+                aux.put(nombres.get(5),data.getString(nombres.get(5)));
+                aux.put(nombres.get(6),data.getBoolean(nombres.get(6)));
+                valores.put(data.getInt(nombres.get(0)),aux);
+//              Artistas a= new Artistas(data.getInt("persona_id"),data.getString("nombre"),data.getString("apellido"), LocalDate.parse(data.getString("fecha_nacimiento")),data.getString("celular"),data.getString("genero_musical"),data.getBoolean("es_destacado"));
+//              artistas.add(a);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return artistas;
+        return valores;
     }
 
     public void artistaPorEscenario(){
