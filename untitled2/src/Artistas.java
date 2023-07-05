@@ -50,7 +50,6 @@ public class Artistas extends Personas {
         return "Artistas{" +
                 "genero_musical='" + genero_musical + '\'' +
                 ", es_destacado=" + es_destacado +
-                ", canciones=" + canciones +
                 '}';
     }
 }
