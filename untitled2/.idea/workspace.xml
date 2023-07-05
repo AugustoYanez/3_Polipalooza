@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="54653d3f-fa77-4147-8e8d-0731dc630d72" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/libraries/mysql_connector_j_8_0_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Polipalooza/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/Polipalooza.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/AccesoBaseDeDatos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Artistas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Asistentes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Canciones.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Escenarios.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/PersonalProduccion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Personas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Presentaciones.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/ProduccionEscenarios.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Roles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/libs/mysql-connector-j-8.0.33.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Polipalooza/untitled2.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2S3lvpoJjrYE9c15UDbRYlFfzeC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/ruttecuatron1/Escritorio/3_Polipalooza"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="54653d3f-fa77-4147-8e8d-0731dc630d72" name="Changes" comment="" />
+      <created>1688383378716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688383378716</updated>
+    </task>
+    <servers />
+  </component>
+</project>
