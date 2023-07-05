@@ -70,7 +70,7 @@ public class AccesoBaseDeDatos {
     }
     public HashMap<Integer,HashMap<String,Object>> obtenerDatosArtista(){
         ResultSet data;
-        ArrayList<String> nombres = obtenerColumnasDeUnaTabla("Usuario");
+        ArrayList<String> nombres = obtenerColumnasDeUnaTabla("Artistas");
         HashMap<Integer,HashMap<String,Object>>  valores=new HashMap<Integer,HashMap<String,Object>>();
         String consulta= "select Personas.persona_id,nombre,apellido,fecha_nacimiento,celular,genero_musical,es_destacado from Personas inner join Artistas ON Personas.persona_id=Artistas.artista_id;";
         System.out.println(consulta);
@@ -82,12 +82,11 @@ public class AccesoBaseDeDatos {
                 aux.put(nombres.get(1),data.getString(nombres.get(1)));
                 aux.put(nombres.get(2),data.getString(nombres.get(2)));
                 aux.put(nombres.get(3),data.getDate(nombres.get(3)));
-                aux.put(nombres.get(4),data.getInt(nombres.get(4)));
+                aux.put(nombres.get(4),data.getString(nombres.get(4)));
                 aux.put(nombres.get(5),data.getString(nombres.get(5)));
                 aux.put(nombres.get(6),data.getBoolean(nombres.get(6)));
                 valores.put(data.getInt(nombres.get(0)),aux);
-//              Artistas a= new Artistas(data.getInt("persona_id"),data.getString("nombre"),data.getString("apellido"), LocalDate.parse(data.getString("fecha_nacimiento")),data.getString("celular"),data.getString("genero_musical"),data.getBoolean("es_destacado"));
-//              artistas.add(a);
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

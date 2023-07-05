@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AccesoBaseDeDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/AccesoBaseDeDatos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sistema.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sistema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/untitled2.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +17,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Sistema.java" root0="SKIP_INSPECTION" />
-  </component>
   <component name="ProjectId" id="2S6q4CfuSmzzL3MWUyJ94Rzb9Ql" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,10 +25,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/pulstein/Escritorio/3_Polipalooza/untitled2/out/production/untitled2/libs/mysql-connector-j-8.0.33.jar",
+    "last_opened_file_path": "/home/pulstein/Escritorio/3_Polipalooza/untitled2/src",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

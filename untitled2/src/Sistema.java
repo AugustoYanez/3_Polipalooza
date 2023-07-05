@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -22,7 +23,17 @@ public class Sistema {
     }
 
     public HashSet<Artistas>recorrerArtistas(){
-        HashSet<Artistas> artistas = new HashSet<>();
+        HashMap<Integer,HashMap<String,Object>> valores= bdd.obtenerDatosArtista();
+        for(Map.Entry<Integer,HashMap<String,Object>> v:valores.entrySet()){
+          String nombre=(String) v.getValue().get("nombre");
+          String apellido=(String) v.getValue().get("apellido");
+          Date nacimiento=(Date) v.getValue().get("fecha_nacimiento");
+          String celular=(String) v.getValue().get("celular");
+          String genero=(String) v.getValue().get("genero");
+          Boolean destacado=(Boolean) v.getValue().get("destacado");
+          Artistas a= new Artistas(v.getKey(),nombre,apellido,nacimiento.toLocalDate(),celular,genero,destacado);
+          artistas.add(a);
+        }
 
         return artistas;
     }
@@ -122,6 +133,7 @@ public class Sistema {
 
         try {
             lolla2023.getbdd().conectar("alumno","alumnoipm");
+            lolla2023.recorrerArtistas();
 
         } catch (SQLException ex) {
             System.out.println(ex);
