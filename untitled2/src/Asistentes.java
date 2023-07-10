@@ -13,6 +13,11 @@ public class Asistentes extends Personas {
         this.requerimiento_varchar = requerimiento_varchar;
     }
 
+    public Asistentes(String nombre, Boolean es_vip, String requerimiento_varchar) {
+        super(nombre);
+        this.es_vip = es_vip;
+        this.requerimiento_varchar = requerimiento_varchar;
+    }
 
     public Boolean getEs_vip() {
         return es_vip;

@@ -76,13 +76,15 @@ public class Sistema {
         return escenarios;
     }
 
+    //Consultas
+
     public String artistaMasJoven(){
         String masJoven = "";
         for (Escenarios i : this.getEscenarios()){
             Artistas currentMasJoven = null;
             for (Map.Entry<Artistas,ArrayList<LocalDateTime>> hash:i.getPresentaciones().entrySet()) {
                 Artistas a = hash.getKey();
-                if (currentMasJoven == null || currentMasJoven.getFecha_nacimiento().before(a.getFecha_nacimiento())){
+                if (currentMasJoven == null || currentMasJoven.getFecha_nacimiento().after(a.getFecha_nacimiento())){
                     currentMasJoven = a;
                 }
             }

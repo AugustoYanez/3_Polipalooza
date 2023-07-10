@@ -19,6 +19,10 @@ public class Personas {
     public Personas() {
     }
 
+    public Personas(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Personas(String nombre, Date fecha_nacimiento) {
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
