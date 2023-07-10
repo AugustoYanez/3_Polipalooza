@@ -15,6 +15,10 @@ public class Personas {
     public Personas() {
     }
 
+    public Personas(LocalDate fecha_nacimiento){
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
     public Personas(String nombre) {
         this.nombre = nombre;
     }

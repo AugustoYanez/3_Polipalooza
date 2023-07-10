@@ -16,13 +16,7 @@ public class Main {
 
 
 
-      HashSet<Escenarios> escenarios = lola.crearEscenario();
 
-        for ( Escenarios i : escenarios){
-            System.out.println(i.getId() + "\n"+
-                    i.getEscenario() + "\n" +
-                    i.getCapacidad());
-        }
 /**
         lola.escenarioSistema();
         lola.personalSistema();
@@ -53,6 +47,8 @@ public class Main {
         System.out.println("El nombre del escenario que tiene el último show del festival:");
         lola.getbdd().ar1();//no funciona
 **/
+
+
 
     }
 }

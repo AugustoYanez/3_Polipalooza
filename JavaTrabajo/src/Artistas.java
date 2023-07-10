@@ -8,6 +8,11 @@ public class Artistas extends Personas {
     private Boolean es_destacado;
     private ArrayList<Canciones> canciones;
 
+
+    public Artistas(LocalDate fecha_nacimiento){
+        super(fecha_nacimiento);
+    }
+
     public Artistas(String nombre, String genero_musical, Boolean es_destacado, ArrayList<Canciones> canciones) {
         super(nombre);
         this.genero_musical = genero_musical;

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e945ceaf-c36a-4aa2-8b9b-7e9b6a5dfd37" name="Changes" comment="" />
+    <list default="true" id="e945ceaf-c36a-4aa2-8b9b-7e9b6a5dfd37" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +27,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/pulstein/Escritorio/3_Polipalooza/Polipalooza"
+    "last_opened_file_path": "/home/ruttecuatron1/Escritorio/3_Polipalooza/JavaTrabajo"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -37,9 +39,19 @@
       <option name="presentableId" value="Default" />
       <updated>1686571207568</updated>
     </task>
+    <task id="LOCAL-00001" summary="Corregi cosas, agrege nuevos datos a la db, y hice el diagrama de clases.">
+      <created>1688559727809</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688559727809</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Corregi cosas, agrege nuevos datos a la db, y hice el diagrama de clases." />
+    <option name="LAST_COMMIT_MESSAGE" value="Corregi cosas, agrege nuevos datos a la db, y hice el diagrama de clases." />
   </component>
 </project>
