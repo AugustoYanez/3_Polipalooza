@@ -1,11 +1,13 @@
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Asistentes extends Personas {
     private Boolean es_vip;
 
     private String requerimiento_varchar;
 
-    public Asistentes(int persona_id, String nombre, String apellido, LocalDate fecha_nacimiento, String celular, Boolean es_vip, String requerimiento_varchar) {
+    public Asistentes(int persona_id, String nombre, String apellido, Date fecha_nacimiento, String celular, Boolean es_vip, String requerimiento_varchar) {
         super(persona_id, nombre, apellido, fecha_nacimiento, celular);
         this.es_vip = es_vip;
         this.requerimiento_varchar = requerimiento_varchar;

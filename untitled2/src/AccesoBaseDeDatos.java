@@ -12,9 +12,14 @@ public class AccesoBaseDeDatos {
     private String nombreBaseDeDatos;
     private List<String> nombreTabla;
 
-    public AccesoBaseDeDatos(String nombreBaseDeDatos, List<String> nombreTabla) {
+    public AccesoBaseDeDatos(String nombreBaseDeDatos, List<String> nombreTabla, String user, String password) {
         this.nombreBaseDeDatos = nombreBaseDeDatos;
         this.nombreTabla = nombreTabla;
+        try {
+            this.conectar(user, password);
+        }catch (SQLException er){
+            System.out.println(er);
+        }
     }
 
     public void conectar(String user, String password) throws SQLException {
@@ -51,23 +56,6 @@ public class AccesoBaseDeDatos {
             ex.printStackTrace();
         }
 
-    }
-    public HashSet<Artistas> obtenerDatosArtista(){
-        ResultSet data;
-        HashSet<Artistas>  artistas=new HashSet<Artistas>();
-        String consulta= "select Personas.persona_id,nombre,apellido,fecha_nacimiento,celular,genero_musical,es_destacado from Personas inner join Artistas ON Personas.persona_id=Artistas.artista_id;";
-        System.out.println(consulta);
-        try {
-            PreparedStatement sentenciaSQL = conexion.prepareStatement(consulta);
-            data = sentenciaSQL.executeQuery(consulta);
-            while (data.next() == true) {
-                Artistas a= new Artistas(data.getInt("persona_id"),data.getString("nombre"),data.getString("apellido"), LocalDate.parse(data.getString("fecha_nacimiento")),data.getString("celular"),data.getString("genero_musical"),data.getBoolean("es_destacado"));
-                artistas.add(a);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return artistas;
     }
 
     public void artistaPorEscenario(){
@@ -222,66 +210,6 @@ public class AccesoBaseDeDatos {
         }
     }
 
-    /**  public HashMap<Artistas, ArrayList<Date>> cargarPresentacion(int id){
-        ResultSet data;
-        String sql = "call Polipalooza.cargarPresentaciones(" + id + ");";
-        HashMap <Artistas, ArrayList<Date>> presentaciones = new HashMap<Artistas, ArrayList<Date>>();
-        try{
-            PreparedStatement sentencia = conexion.prepareStatement(sql);
-            data = sentencia.executeQuery(sql);
-           while(data.next()){
-               Artistas a = new Artistas(data.getString("nombre"), data.getString("genero_musical"), data.getBoolean("es_destacado"), null);
-               ArrayList<Date> horario = new ArrayList<>();
-               horario.add(data.getDate("horario_inicio"));
-               horario.add(data.getDate("horario_fin"));
-               presentaciones.put(a, horario);
-           }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return presentaciones;
-    }
-       public HashSet<PersonalProduccion> cargarPersonal(){
-        HashSet<PersonalProduccion> personalProduccion = new HashSet<>();
-        ResultSet data;
-        String sql = "select PersonalProduccion.personal_id, Personas.nombre, nombreRol from Personas\n" +
-                "join PersonalProduccion on Personas.persona_id = PersonalProduccion.persona_id\n" +
-                "join roles on rol = roles_rol;";
-        try{
-            PreparedStatement sentencia = conexion.prepareStatement(sql);
-            data = sentencia.executeQuery(sql);
-            while(data.next()){
-                PersonalProduccion a = new PersonalProduccion(data.getInt("personal_id"), data.getString("nombreRol"));
-                personalProduccion.add(a);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return personalProduccion;
-    }
-
-
-
-    public HashSet<PersonalProduccion> cargarPersonalEscenario(int id){
-        HashSet<PersonalProduccion> personalProduccion = new HashSet<>();
-        ResultSet data;
-        String sql = "call Polipalooza.escenarioPersonal(" + id + ");";
-        try{
-            PreparedStatement sentencia = conexion.prepareStatement(sql);
-            data = sentencia.executeQuery(sql);
-            while(data.next()){
-                PersonalProduccion a = new PersonalProduccion(data.getInt("personal_id"), data.getString("nombreRol"));
-                personalProduccion.add(a);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return personalProduccion;
-    }
-    **/
-// 1 rnombreRol ro1
 
     public HashMap<Integer,HashMap<String,Object>> cargarPersonal1 (int id){
 
@@ -334,7 +262,7 @@ public class AccesoBaseDeDatos {
     public HashMap<Integer,HashMap<String,Object>> cargarPresentaciones(int id){
         HashMap<Integer,HashMap<String,Object>> valores = new HashMap<>();
         ResultSet data;
-        String sql = "select Artistas.artista_id, nombre, horario_inicio, horario_fin, genero_musical, es_destacado from Presentaciones join Artistas on Artistas.artista_id = Presentaciones.artista_id join Personas on Artistas.persona_id = Personas.persona_id where escenario_id = " + id + ";";
+        String sql = "select Artistas.artista_id, nombre, fecha_nacimiento, horario_inicio, horario_fin, genero_musical, es_destacado from Presentaciones join Artistas on Artistas.artista_id = Presentaciones.artista_id join Personas on Artistas.persona_id = Personas.persona_id where escenario_id = " + id + ";";
 
         PreparedStatement sentencia = null;
         try {
@@ -344,10 +272,11 @@ public class AccesoBaseDeDatos {
             while ( data.next()){
                 HashMap<String,Object> aux = new HashMap<>();
                 aux.put("nombre",data.getString("nombre"));
-                aux.put("horario_inicio",data.getDate("horario_inicio"));
-                aux.put("horario_fin",data.getDate("horario_fin"));
+                aux.put("fecha_nacimiento",data.getDate("fecha_nacimiento"));
+                aux.put("horario_inicio",data.getString("horario_inicio"));
+                aux.put("horario_fin",data.getString("horario_fin"));
                 aux.put("genero_musical",data.getString("genero_musical"));
-                aux.put("es_destacado",data.getString("es_destacado"));
+                aux.put("es_destacado",data.getBoolean("es_destacado"));
                 valores.put(data.getInt("artista_id"),aux);
             }
         } catch (SQLException e) {

@@ -6,23 +6,9 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Sistema lola = new Sistema();
-        try {
-            lola.getbdd().conectar("alumno","alumnoipm");
+            Sistema lola = new Sistema();
 
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-
-
-
-      HashSet<Escenarios> escenarios = lola.crearEscenario();
-
-        for ( Escenarios i : escenarios){
-            System.out.println(i.getId() + "\n"+
-                    i.getEscenario() + "\n" +
-                    i.getCapacidad());
-        }
+        System.out.println(lola.artistaMasJoven());
 /**
         lola.escenarioSistema();
         lola.personalSistema();

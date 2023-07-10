@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Personas {
 
@@ -8,24 +8,30 @@ public class Personas {
 
    private String apellido;
 
-   private LocalDate fecha_nacimiento;
+   private Date fecha_nacimiento;
 
    private String celular;
+
+    public Personas(Date fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
 
     public Personas() {
     }
 
-    public Personas(String nombre) {
+    public Personas(String nombre, Date fecha_nacimiento) {
         this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public Personas(int persona_id, String nombre, String apellido, LocalDate fecha_nacimiento, String celular) {
+    public Personas(int persona_id, String nombre, String apellido, Date fecha_nacimiento, String celular) {
         Persona_id = persona_id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
         this.celular = celular;
     }
+
 
     public int getPersona_id() {
         return Persona_id;
@@ -51,11 +57,11 @@ public class Personas {
         this.apellido = apellido;
     }
 
-    public LocalDate getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
