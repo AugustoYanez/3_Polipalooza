@@ -1,10 +1,8 @@
-import java.time.LocalDate;
-
 public class PersonalProduccion extends Personas {
     private int idPersonal;
-    private String rol;
+    private Rol rol;
 
-    public PersonalProduccion(int idPersonal, String rol) {
+    public PersonalProduccion(int idPersonal, Rol rol) {
         super();
         this.idPersonal = idPersonal;
         this.rol = rol;
@@ -18,11 +16,11 @@ public class PersonalProduccion extends Personas {
         this.idPersonal = idPersonal;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 

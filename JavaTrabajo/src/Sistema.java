@@ -48,7 +48,7 @@ public class Sistema {
         HashSet<PersonalProduccion> persProd = new HashSet<>();
         HashMap<Integer, HashMap<String, Object>> ps = bdd.cargarPersonal1(id);
         for (Map.Entry<Integer, HashMap<String, Object>> p:ps.entrySet()) {
-            persProd.add(new PersonalProduccion(p.getKey(),p.getValue().get("nombreRol").toString()));
+            persProd.add(new PersonalProduccion(p.getKey(),Rol.valueOf(p.getValue().get("nombreRol").toString().toUpperCase())));
         }
         return persProd;
     }
@@ -77,9 +77,9 @@ public class Sistema {
 
     public String artistaMasJoven(){
         String masJoven = "";
-        for (Escenarios i : this.getEscenarios()){
+        for (Escenarios i : escenarios){
             Artistas currentMasJoven = new Artistas(LocalDate.now());
-            for (Map.Entry<Artistas,ArrayList<LocalDateTime>> hash:i.getPresentaciones().entrySet()) {
+            for (   Map.Entry<Artistas,ArrayList<LocalDateTime>> hash:i.getPresentaciones().entrySet()) {
                 Artistas a = hash.getKey();
                 if (currentMasJoven.getFecha_nacimiento().isBefore(a.getFecha_nacimiento())){
                     currentMasJoven = a;
@@ -91,6 +91,22 @@ public class Sistema {
         return masJoven;
     }
 
+    public HashSet<Escenarios> escenarioPersonalInsuficiente(){
+        HashSet<Rol>roles = new HashSet<>();
+        HashSet<Escenarios> escenarioConPersonalInsuficiente = new HashSet<>();
+        for (Escenarios e : escenarios){
+            for (PersonalProduccion p : e.getProduccioneEscenarios()){
+                roles.add(p.getRol());
+            }
+            if (roles.size()<3){
+                escenarioConPersonalInsuficiente.add(e);
+            }
+        }
+
+        return escenarioConPersonalInsuficiente;
+    }
+
+
     public static void main(String[] args) {
         Sistema lolla2023 = new Sistema();
 
@@ -100,11 +116,26 @@ public class Sistema {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        lolla2023.crearEscenario();
 
+        //cargar todas las colecciones
+        lolla2023.setEscenarios(lolla2023.crearEscenario());
+        lolla2023.setPersonal(lolla2023.crearPersonal(-1));
+
+
+        //resuelvo las consignas.
+        //3-a
+        System.out.println("PUNTO A:");
+        lolla2023.getbdd().artistaPorEscenario();
+        //3-b
+        System.out.println("PUNTO B:");
         lolla2023.artistaMasJoven();
+        //3-c
+        System.out.println("PUNTO C:");
+        lolla2023.escenarioPersonalInsuficiente();
+        //3-d
 
-  // artistaMasJoven
+
+
 
 
 
