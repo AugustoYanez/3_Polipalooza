@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54653d3f-fa77-4147-8e8d-0731dc630d72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/libraries/mysql_connector_j_8_0_33.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Polipalooza/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/Polipalooza.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/AccesoBaseDeDatos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Artistas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Asistentes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Canciones.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Escenarios.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/PersonalProduccion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Personas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Presentaciones.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/ProduccionEscenarios.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/Roles.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/src/libs/mysql-connector-j-8.0.33.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Polipalooza/untitled2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +24,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/ruttecuatron1/Escritorio/3_Polipalooza"
+    "last_opened_file_path": "/home/pulstein/Escritorio/3_Polipalooza/JavaTrabajo",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
