@@ -111,9 +111,9 @@ public class Sistema {
                 }
             }
         }
-        for (Map.Entry<Artistas, Integer> a: aux.entrySet()) {
-            if (a.getValue() >= 2){
-                System.out.println(a.getKey().getNombre());
+        for (Map.Entry<Integer, ArrayList<Object>> a: aux.entrySet()) {
+            if ((int) a.getValue().get(1) >= 2){
+                System.out.println((Artistas) a.getValue().get(0));
             }
         }
     }

@@ -10,7 +10,6 @@ public class Main {
             Sistema lola = new Sistema();
 
         System.out.println(lola.artistaMasJoven());
-        lola.doblePresentacion();
         for (Escenarios e: lola.getEscenarios()) {
             for ( Map.Entry<Artistas,ArrayList<LocalDateTime>> p: e.getPresentaciones().entrySet()) {
                 System.out.println(p.getKey().getNombre()+ "  -  " + p.getValue().get(0) + " a " + p.getValue().get(1));
