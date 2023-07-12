@@ -61,7 +61,7 @@ public class Sistema {
             HashMap<String, Object> h = p.getValue();
             horarios.add(LocalDateTime.parse((String) h.get("horario_inicio"),formatter));
             horarios.add(LocalDateTime.parse((String) h.get("horario_fin"), formatter));
-            pres.put(new Artistas(h.get("nombre").toString(), (Date) h.get("fecha_nacimiento"), h.get("genero_musical").toString(), (Boolean) h.get("es_destacado"), null), horarios);
+            pres.put(new Artistas((int) p.getKey() ,h.get("nombre").toString(), (Date) h.get("fecha_nacimiento"), h.get("genero_musical").toString(), (Boolean) h.get("es_destacado"), null), horarios);
         }
         return pres;
     }
@@ -92,5 +92,29 @@ public class Sistema {
         }
 
         return masJoven;
+    }
+
+    public void doblePresentacion(){// 2 o mas
+        HashMap<Integer, ArrayList<Object>> aux = new HashMap<>(); //Dentro del Array guardo en la primer posicion
+        for (Escenarios e : escenarios) {
+            for (Map.Entry<Artistas, ArrayList<LocalDateTime>> a: e.getPresentaciones().entrySet()) {
+                if (aux.containsKey(a.getKey().getPersona_id())){
+                    ArrayList<Object> ap = aux.get(a.getKey().getPersona_id());
+                    int apari = (int) ap.get(1);
+                    ap.set(1, apari+1);
+                    aux.put(a.getKey().getPersona_id(),ap);
+                } else {
+                    ArrayList<Object> ap = new ArrayList<>();
+                    ap.add(a.getKey());
+                    ap.add(1);
+                    aux.put(a.getKey().getPersona_id(),ap);
+                }
+            }
+        }
+        for (Map.Entry<Artistas, Integer> a: aux.entrySet()) {
+            if (a.getValue() >= 2){
+                System.out.println(a.getKey().getNombre());
+            }
+        }
     }
 }

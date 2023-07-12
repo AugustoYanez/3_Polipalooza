@@ -36,6 +36,11 @@ public class Personas {
         this.celular = celular;
     }
 
+    public Personas(int persona_id, String nombre, Date fecha_nacimiento) {
+        Persona_id = persona_id;
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
 
     public int getPersona_id() {
         return Persona_id;
