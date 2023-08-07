@@ -15,5 +15,7 @@ public class Main {
                 System.out.println(p.getKey().getNombre()+ "  -  " + p.getValue().get(0) + " a " + p.getValue().get(1));
             }
         }
+
+        lola.doblePresentacion();
     }
 }

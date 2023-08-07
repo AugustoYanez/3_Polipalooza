@@ -129,4 +129,47 @@ public class AccesoBaseDeDatos {
         }
         return asistentes;
     }
+    public void artistaPorEscenario(){
+        ResultSet data;
+        // Lista de artistas por escenario
+        String sqlListaArtistas = "call Polipalooza.escenarioArtistas();";
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlListaArtistas);
+            data = sentenciaSQL.executeQuery(sqlListaArtistas);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreArtista = data.getString("nombre");
+                System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void artistaMasJoven(){
+        ResultSet data;
+        String sqlArtistaMasJoven = "SELECT pr.escenario_id, p.nombre AS nombre_artista, p.fecha_nacimiento " +
+                "FROM Presentaciones pr " +
+                "JOIN Artistas a ON pr.artista_id = a.artista_id " +
+                "JOIN Personas p ON a.persona_id = p.persona_id " +
+                "WHERE p.fecha_nacimiento = (SELECT MAX(p2.fecha_nacimiento) " +
+                "                            FROM Presentaciones pr2 " +
+                "                            JOIN Artistas a2 ON pr2.artista_id = a2.artista_id " +
+                "                            JOIN Personas p2 ON a2.persona_id = p2.persona_id " +
+                "                            WHERE pr2.escenario_id = pr.escenario_id " +
+                "                            ORDER BY p2.fecha_nacimiento ASC " +
+                "                            LIMIT 1) " +
+                "ORDER BY pr.escenario_id";
+        try {
+            PreparedStatement sentenciaSQL = conexion.prepareStatement(sqlArtistaMasJoven);
+            data = sentenciaSQL.executeQuery(sqlArtistaMasJoven);
+            while (data.next()) {
+                int escenarioId = data.getInt("escenario_id");
+                String nombreArtista = data.getString("nombre_artista");
+                Date fechaNacimiento = data.getDate("fecha_nacimiento");
+                System.out.println("Escenario ID: " + escenarioId + ", Artista: " + nombreArtista + ", Fecha de nacimiento: " + fechaNacimiento);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
